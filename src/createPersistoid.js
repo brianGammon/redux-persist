@@ -102,11 +102,13 @@ export default function createPersistoid(config: PersistConfig): Persistoid {
       }
     })
 
-    let setItemPromise = storage.setItem(storageKey, serialize(stagedState));
+    let setItemPromise = null;
     console.log(stagedState);
-    const triggerError = stagedState.chickens.indexOf('CannotSave') > -1;
+    const triggerError = stagedState.chickens.indexOf('CantSave') > -1;
     if (triggerError) {
-      setItemPromise = Promise.reject(new Error('CannotSave test was tiggered'));
+      setItemPromise = Promise.reject(new Error('CantSave test was tiggered'));
+    } else {
+      setItemPromise = storage.setItem(storageKey, serialize(stagedState));
     }
 
     writePromise = setItemPromise
