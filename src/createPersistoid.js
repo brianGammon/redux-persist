@@ -104,9 +104,9 @@ export default function createPersistoid(config: PersistConfig): Persistoid {
 
     let setItemPromise = storage.setItem(storageKey, serialize(stagedState));
     console.log(stagedState);
-    const hasBart = stagedState.chickens.indexOf('Batman') > -1;
-    if (hasBart) {
-      setItemPromise = Promise.reject(new Error('Cannot have a chicken named Bart'));
+    const triggerError = stagedState.chickens.indexOf('CannotSave') > -1;
+    if (triggerError) {
+      setItemPromise = Promise.reject(new Error('CannotSave test was tiggered'));
     }
 
     writePromise = setItemPromise
