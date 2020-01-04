@@ -104,7 +104,7 @@ export default function createPersistoid(config: PersistConfig): Persistoid {
 
     let setItemPromise = storage.setItem(storageKey, serialize(stagedState));
     console.log(stagedState);
-    const hasBart = stagedState.chickens.indexOf('Bart') > -1;
+    const hasBart = stagedState.chickens.indexOf('Batman') > -1;
     if (hasBart) {
       setItemPromise = Promise.reject(new Error('Cannot have a chicken named Bart'));
     }
