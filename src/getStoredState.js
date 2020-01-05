@@ -21,17 +21,7 @@ export default function getStoredState(
   } else {
     deserialize = defaultDeserialize
   }
-
-  // let getItemPromise = null;
-  // const now = Date.now();
-  // if (now % 5 === 0) {
-  //   getItemPromise = Promise.reject(new Error('You have hit the fake getItem error'));
-  // } else {
-  //   getItemPromise = storage.getItem(storageKey);
-  // }
-  const getItemPromise = storage.getItem(storageKey);
-
-  return getItemPromise.then(serialized => {
+  return storage.getItem(storageKey).then(serialized => {
     if (!serialized) return undefined
     else {
       try {
