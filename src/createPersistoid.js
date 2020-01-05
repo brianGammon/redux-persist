@@ -104,11 +104,11 @@ export default function createPersistoid(config: PersistConfig): Persistoid {
     })
 
     let setItemPromise = null;
-    console.log(stagedState);
     const triggerError = stagedState.chickens.indexOf('CantSave') > -1;
     if (triggerError) {
       setItemPromise = Promise.reject(new Error('CantSave test was tiggered'));
     } else {
+      console.log('Calling setItem');
       setItemPromise = storage.setItem(storageKey, serialize(stagedState));
     }
 
@@ -124,6 +124,7 @@ export default function createPersistoid(config: PersistConfig): Persistoid {
   }
 
   function onWriteFail(err) {
+    console.log('In onWriteFail');
     // @TODO add fail handlers (typically storage full)
     if (writeFailHandler) writeFailHandler(err)
     if (err && process.env.NODE_ENV !== 'production') {
