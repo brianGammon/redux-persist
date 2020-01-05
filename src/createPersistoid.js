@@ -108,15 +108,8 @@ export default function createPersistoid(config: PersistConfig): Persistoid {
     if (triggerError) {
       setItemPromise = Promise.reject(new Error('CantSave test was tiggered'));
     } else {
-      console.log('Serializing the entire set');
-      let serializedStagedState = null;
-      try {
-        serializedStagedState = serialize(stagedState);
-      } catch (error) {
-        console.log('serializedStagedState error: ', error);
-      }
       console.log('Calling setItem');
-      setItemPromise = storage.setItem(storageKey, serializedStagedState);
+      setItemPromise = storage.setItem(storageKey, serialize(stagedState));
     }
 
     writePromise = setItemPromise
