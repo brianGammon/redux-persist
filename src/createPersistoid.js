@@ -71,6 +71,7 @@ export default function createPersistoid(config: PersistConfig): Persistoid {
     }
 
     let key = keysToProcess.shift()
+    console.log('Doing key: ', key);
     let endState = transforms.reduce((subState, transformer) => {
       return transformer.in(subState, key, lastState)
     }, lastState[key])
@@ -88,7 +89,7 @@ export default function createPersistoid(config: PersistConfig): Persistoid {
       //if the endState is undefined, no need to persist the existing serialized content
       delete stagedState[key]
     }
-
+    console.log('keysToProcess.length: ', keysToProcess.length);
     if (keysToProcess.length === 0) {
       writeStagedState()
     }
